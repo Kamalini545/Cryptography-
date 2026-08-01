@@ -1,0 +1,15 @@
+from math import gcd
+
+n = 3599
+e = 31
+m = 61          # Plaintext block sharing a factor with n
+
+f = gcd(m, n)
+
+if f > 1:
+    p = f
+    q = n // p
+    print("p =", p)
+    print("q =", q)
+else:
+    print("No common factor found")
