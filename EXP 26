@@ -1,0 +1,6 @@
+e = 31
+d = 3031
+n = 3599
+
+print("Public Key :", (e, n))
+print("Private Key:", (d, n))
