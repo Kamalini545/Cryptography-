@@ -1,0 +1,22 @@
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+
+key = b'1234567890123456'
+iv = b'1234567890123456'
+msg = b'HELLO'
+
+# ECB
+c = AES.new(key, AES.MODE_ECB)
+print("ECB:", unpad(c.decrypt(c.encrypt(pad(msg,16))),16))
+
+# CBC
+c = AES.new(key, AES.MODE_CBC, iv)
+e = c.encrypt(pad(msg,16))
+c = AES.new(key, AES.MODE_CBC, iv)
+print("CBC:", unpad(c.decrypt(e),16))
+
+# CFB
+c = AES.new(key, AES.MODE_CFB, iv)
+e = c.encrypt(msg)
+c = AES.new(key, AES.MODE_CFB, iv)
+print("CFB:", c.decrypt(e))
