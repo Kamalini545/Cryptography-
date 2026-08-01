@@ -1,0 +1,20 @@
+key = 0b0111111101
+ctr = 0
+
+pt = [1, 2, 4]      # 00000001, 00000010, 00000100
+
+print("Cipher:")
+ct = []
+for p in pt:
+    k = (key + ctr) & 0xFF
+    c = p ^ k
+    ct.append(c)
+    print(bin(c)[2:].zfill(8), end=" ")
+    ctr += 1
+
+print("\nPlain:")
+ctr = 0
+for c in ct:
+    k = (key + ctr) & 0xFF
+    print(bin(c ^ k)[2:].zfill(8), end=" ")
+    ctr += 1
