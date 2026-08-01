@@ -1,0 +1,12 @@
+from collections import Counter
+
+cipher = input("Cipher: ").upper()
+freq = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
+
+c = Counter(ch for ch in cipher if ch.isalpha())
+order = ''.join(i for i, _ in c.most_common())
+
+table = {order[i]: freq[i] for i in range(len(order))}
+plain = ''.join(table.get(ch, ch) for ch in cipher)
+
+print("Possible Plaintext:", plain)
