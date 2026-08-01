@@ -1,0 +1,11 @@
+cipher = input("Cipher: ").upper()
+n = int(input("Top results: "))
+
+for k in range(min(n,26)):
+    p = ""
+    for ch in cipher:
+        if ch.isalpha():
+            p += chr((ord(ch)-65-k)%26 + 65)
+        else:
+            p += ch
+    print("Key", k, ":", p)
