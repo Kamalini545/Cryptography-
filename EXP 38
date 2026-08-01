@@ -1,0 +1,10 @@
+import numpy as np
+
+key = np.array([[3,3],[2,5]])
+msg = "HELP"
+
+# Encrypt
+for i in range(0, len(msg), 2):
+    p = np.array([ord(msg[i])-65, ord(msg[i+1])-65])
+    c = key.dot(p) % 26
+    print(chr(c[0]+65)+chr(c[1]+65), end="")
