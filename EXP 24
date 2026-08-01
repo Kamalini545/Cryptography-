@@ -1,0 +1,9 @@
+e = 31
+p, q = 59, 61          # 59 × 61 = 3599
+phi = (p-1)*(q-1)
+
+d = 1
+while (d * e) % phi != 1:
+    d += 1
+
+print("Private Key (d,n):", d, n := p*q)
