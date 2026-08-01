@@ -1,0 +1,9 @@
+def left_shift(x, bits):
+    return ((x << 1) & ((1 << bits) - 1))
+
+L = 0x123456789ABCDEF0
+K1 = left_shift(L, 64)
+K2 = left_shift(K1, 64)
+
+print("K1 =", hex(K1))
+print("K2 =", hex(K2))
