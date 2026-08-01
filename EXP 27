@@ -1,0 +1,8 @@
+e = 31
+n = 3599
+
+# Encrypt each character separately
+msg = "HELLO"
+cipher = [pow(ord(ch)-65, e, n) for ch in msg]
+
+print("Cipher:", cipher)
