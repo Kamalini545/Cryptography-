@@ -1,0 +1,12 @@
+from Crypto.Cipher import AES
+
+key = b'1234567890123456'
+X = b'1234567890ABCDEF'
+
+aes = AES.new(key, AES.MODE_ECB)
+
+T = aes.encrypt(X)                 # MAC of one block
+X2 = bytes(a ^ b for a, b in zip(X, T))
+
+print("MAC :", T.hex())
+print("Second Block:", X2.hex())
