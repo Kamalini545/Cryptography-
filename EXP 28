@@ -1,0 +1,14 @@
+q = 23
+a = 5
+
+xa = 6      # Alice's secret
+xb = 15     # Bob's secret
+
+A = pow(a, xa, q)
+B = pow(a, xb, q)
+
+KA = pow(B, xa, q)
+KB = pow(A, xb, q)
+
+print("Alice Key:", KA)
+print("Bob Key:", KB)
