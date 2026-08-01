@@ -1,0 +1,17 @@
+from Crypto.PublicKey import DSA
+from Crypto.Signature import DSS
+from Crypto.Hash import SHA256
+
+key = DSA.generate(1024)
+msg = b"HELLO"
+
+h = SHA256.new(msg)
+signer = DSS.new(key, 'fips-186-3')
+
+s1 = signer.sign(h)
+h = SHA256.new(msg)
+s2 = signer.sign(h)
+
+print("Signature 1:", s1.hex())
+print("Signature 2:", s2.hex())
+print("Different?", s1 != s2)
