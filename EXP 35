@@ -1,0 +1,14 @@
+msg = "HELLO"
+key = [3, 19, 5, 7, 2]
+
+# Encrypt
+enc = ""
+for i in range(len(msg)):
+    enc += chr((ord(msg[i]) - 65 + key[i]) % 26 + 65)
+print("Cipher:", enc)
+
+# Decrypt
+dec = ""
+for i in range(len(enc)):
+    dec += chr((ord(enc[i]) - 65 - key[i]) % 26 + 65)
+print("Plain :", dec)
