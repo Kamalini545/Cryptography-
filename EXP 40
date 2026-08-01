@@ -1,0 +1,13 @@
+from collections import Counter
+
+c = input("Cipher: ").upper()
+n = int(input("Top results: "))
+f = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
+
+cnt = Counter(ch for ch in c if ch.isalpha())
+order = ''.join(x for x, _ in cnt.most_common())
+
+for i in range(n):
+    m = {order[j]: f[(j+i) % 26] for j in range(len(order))}
+    p = ''.join(m.get(ch, ch) for ch in c)
+    print("Possible", i+1, ":", p)
