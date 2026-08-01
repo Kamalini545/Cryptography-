@@ -1,0 +1,12 @@
+# SHA-3 (Keccak) State Calculation
+
+block_size = 1024
+state_size = 1600
+lane_size = 64
+
+rate_lanes = block_size // lane_size
+capacity_lanes = (state_size - block_size) // lane_size
+
+print("Rate Lanes     :", rate_lanes)
+print("Capacity Lanes :", capacity_lanes)
+print("Total Lanes    :", state_size // lane_size)
