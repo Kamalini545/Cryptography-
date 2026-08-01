@@ -1,0 +1,15 @@
+from Crypto.Cipher import DES
+from Crypto.Util.Padding import pad, unpad
+
+key = b"12345678"
+msg = b"HELLO"
+
+# Encrypt
+des = DES.new(key, DES.MODE_ECB)
+cipher = des.encrypt(pad(msg, 8))
+print("Cipher:", cipher.hex())
+
+# Decrypt
+des = DES.new(key, DES.MODE_ECB)
+plain = unpad(des.decrypt(cipher), 8)
+print("Plain:", plain.decode())
