@@ -1,0 +1,9 @@
+msg = "HELLO"
+a, b = 5, 8          # gcd(5,26)=1
+
+enc = ""
+for ch in msg:
+    p = ord(ch) - 65
+    enc += chr((a*p + b) % 26 + 65)
+
+print("Cipher:", enc)
