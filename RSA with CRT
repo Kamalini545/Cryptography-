@@ -1,0 +1,51 @@
+from math import gcd
+import random
+
+def prime():
+    while True:
+        n = random.randrange(100, 500)
+        if all(n % i for i in range(2, int(n**0.5)+1)):
+            return n
+
+p = prime()
+q = prime()
+
+while p == q:
+    q = prime()
+
+n = p * q
+phi = (p-1) * (q-1)
+e = 65537
+
+while gcd(e, phi) != 1:
+    e = 3
+
+d = pow(e, -1, phi)
+
+m = 123
+
+# Encryption
+c = pow(m, e, n)
+
+# Normal RSA decryption
+normal = pow(c, d, n)
+
+# CRT optimization
+dp = d % (p-1)
+dq = d % (q-1)
+
+mp = pow(c, dp, p)
+mq = pow(c, dq, q)
+
+qinv = pow(q, -1, p)
+h = (qinv * (mp - mq)) % p
+crt = mq + h * q
+
+print("p =", p)
+print("q =", q)
+print("n =", n)
+print("Original =", m)
+print("Encrypted =", c)
+print("Normal Decryption =", normal)
+print("CRT Decryption =", crt)
+print("Correct =", m == crt)
