@@ -1,0 +1,48 @@
+import time
+
+BS = 4
+KEY = b"KEY1"
+IV = b"INIT"
+
+def enc(block):
+    return bytes(a ^ b for a, b in zip(block, KEY))
+
+def xor(a, b):
+    return bytes(x ^ y for x, y in zip(a, b))
+
+def pad(data):
+    n = BS - len(data) % BS
+    return data + bytes([n]) * n
+
+def ecb(data):
+    return b''.join(enc(data[i:i+BS]) for i in range(0,len(data),BS))
+
+def cbc(data):
+    out, prev = b'', IV
+    for i in range(0,len(data),BS):
+        prev = enc(xor(data[i:i+BS], prev))
+        out += prev
+    return out
+
+def cfb(data):
+    out, prev = b'', IV
+    for i in range(0,len(data),BS):
+        prev = xor(data[i:i+BS], enc(prev))
+        out += prev
+    return out
+
+def ofb(data):
+    out, prev = b'', IV
+    for i in range(0,len(data),BS):
+        prev = enc(prev)
+        out += xor(data[i:i+BS], prev)
+    return out
+
+data = pad(b"SECURE COMMUNICATION")
+start = time.time()
+
+print("ECB:", ecb(data))
+print("CBC:", cbc(data))
+print("CFB:", cfb(data))
+print("OFB:", ofb(data))
+print("Time:", round(time.time()-start,6), "seconds")
