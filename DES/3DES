@@ -1,0 +1,36 @@
+import time
+
+# Simplified DES-style Feistel implementation
+def encrypt(data, key):
+    l = data >> 4
+    r = data & 15
+
+    for i in range(8):
+        l, r = r, l ^ ((r + key + i) & 15)
+
+    return (l << 4) | r
+
+def decrypt(data, key):
+    l = data >> 4
+    r = data & 15
+
+    for i in range(7, -1, -1):
+        l, r = r ^ ((l + key + i) & 15), l
+
+    return (l << 4) | r
+
+data = 123
+key = 7
+
+start = time.time()
+
+encrypted = encrypt(data, key)
+decrypted = decrypt(encrypted, key)
+
+end = time.time()
+
+print("Original :", data)
+print("Encrypted:", encrypted)
+print("Decrypted:", decrypted)
+print("Correct  :", data == decrypted)
+print("Time     :", round(end - start, 6), "seconds")
